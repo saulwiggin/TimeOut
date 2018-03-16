@@ -8,8 +8,7 @@ class PlacesToVisit extends React.Component {
   constructor(props) {
     super(props);
     this.names = this.props.entries
-    this.choose_users = []
-    this.choosen_name = []
+    this.choosenUsers = []
     this.placesToAvoid = []
     this.peopleWithPlacesToAvoid = []
     this.placesToVisit = []
@@ -17,27 +16,33 @@ class PlacesToVisit extends React.Component {
   }
 
    calculate(props){
+
     $.getJSON("./scripts/users.json", function (users) {
+
         $.each(users, function (index, value) {
-           console.log(value);
-           var name = []
-           name.foreach(function(){
-             console.log(name)
-             if (name.indexOf(value['names']) > -1){
-               this.choosen_users.pop(value);
+           this.names.forEach(function(name,index){
+             if (name.indexOf(users['names']) > -1){
+               this.choosenUsers.pop(value);
+               console.log(value)
              }
            })
         });
     });
     $.getJSON("./scripts/venues.json", function (venues) {
+
         $.each(venues, function (index, value) {
+
            console.log(value);
+
            $.each(this.choose_users, function(index2, value2){
+
              if (this.choosen_users['wont_eat'].indexOf(value['food']) > -1){
+
                this.placesToAvoid = value
                this.peopleWithPlacesToAvoid = value2
              }
              if (this.choosen_users['drinks'].indexOf(value['drinks']) > -1){
+
                this.placesToVisit = value
                this.peoplePlacesToVisit = value2
              }
